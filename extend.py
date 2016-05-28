@@ -1,4 +1,6 @@
 import numpy as np
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 
 def read_data(filename):
@@ -29,12 +31,31 @@ def extend(dx, dy, data):
 
 
 def finitediff(dx, dy, data):
-    for i in range(len(data)):
-        for j in range(len(data[0])):
-            if i % (dx+1) == 0 & j % (dy+1) == 0:
-            	continue
-        	data[i][j] = 1000
-	return data
+    nx = len(data)
+    ny = len(data[0])
+    for i in range(nx):
+        for j in range(ny):
+            if i % (dx + 1) == 0 and j % (dy + 1) == 0:
+                continue
+            if i == 0 and 0 < j < ny:
+                data[i][j] = (data[i][j - 1] + data[i]
+                              [j + 1] + data[i + 1][j]) / 3
+                continue
+            if j == 0 and 0 < i < nx:
+                data[i][j] = (data[i - 1][j] + data[i + 1]
+                              [j] + data[i][j + 1]) / 3
+                continue
+            if i == nx - 1 and 0 < j < ny:
+                data[i][j] = (data[i][j - 1] + data[i]
+                              [j + 1] + data[i - 1][j]) / 3
+                continue
+            if j == ny - 1 and 0 < i < nx:
+                data[i][j] = (data[i - 1][j] + data[i + 1]
+                              [j] + data[i][j - 1]) / 3
+                continue
+            data[i][j] = (data[i - 1][j] + data[i + 1][j] +
+                          data[i][j - 1] + data[i][j + 1]) / 4
+    return data
 
 
 def main():
@@ -43,7 +64,7 @@ def main():
     arr = get_2dr(arr)
     arr = extend(dx, dy, arr)
     arr = finitediff(dx, dy, arr)
-    np.savetxt("foo.csv", arr, delimiter=",")
+    plot
 
 if __name__ == '__main__':
     main()
