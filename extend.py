@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-ITERATIONS = 10
+ITERATIONS = 200
 
 
 def read_data(filename):
@@ -66,14 +66,13 @@ def plot(data, filename):
     # plt.show()
     plt.savefig(filename + '.png', bbox_inches='tight')
 
-def init_plot():
-
 
 def main():
-    dx, dy = 1, 1
+    dx, dy = 10, 10
     arr = read_data('data.csv')
     arr = get_2dr(arr)
     arr = extend(dx, dy, arr)
+    plot(arr, '_0init')
     for i in range(ITERATIONS):
         arr = finitediff(dx, dy, arr)
         plot(arr, str(i))
