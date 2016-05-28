@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-ITERATIONS = 200
+ITERATIONS = 300
+DX, DY = 40, 40
 
 
 def read_data(filename):
@@ -68,15 +69,15 @@ def plot(data, filename):
 
 
 def main():
-    dx, dy = 10, 10
+    dx, dy = DX, DY
     arr = read_data('data.csv')
     arr = get_2dr(arr)
     arr = extend(dx, dy, arr)
     plot(arr, '_0init')
     for i in range(ITERATIONS):
         arr = finitediff(dx, dy, arr)
-        plot(arr, str(i))
+        #plot(arr, str(i))
         print 'iteration ', i, 'complete'
-
+    plot(arr, 'final')
 if __name__ == '__main__':
     main()
