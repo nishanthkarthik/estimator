@@ -1,6 +1,7 @@
 import numpy as np
-import plotly.plotly as py
-import plotly.graph_objs as go
+import matplotlib.pyplot as plt
+
+ITERATIONS = 10
 
 
 def read_data(filename):
@@ -22,7 +23,7 @@ def get_2dr(data):
 def extend(dx, dy, data):
     ox, oy = len(data), len(data[0])
     nx, ny = (ox - 1) * dx + ox, (oy - 1) * dy + oy
-    print ox, oy, nx, ny
+    print(ox, oy, nx, ny)
     arr = np.zeros((nx, ny))
     for i in range(ox):
         for j in range(oy):
@@ -58,13 +59,25 @@ def finitediff(dx, dy, data):
     return data
 
 
+def plot(data, filename):
+    plt.clf()
+    im = plt.imshow(data, cmap='jet', interpolation='nearest')
+    plt.colorbar(im, orientation='vertical')
+    # plt.show()
+    plt.savefig(filename + '.png', bbox_inches='tight')
+
+def init_plot():
+
+
 def main():
     dx, dy = 1, 1
     arr = read_data('data.csv')
     arr = get_2dr(arr)
     arr = extend(dx, dy, arr)
-    arr = finitediff(dx, dy, arr)
-    plot
+    for i in range(ITERATIONS):
+        arr = finitediff(dx, dy, arr)
+        plot(arr, str(i))
+        print 'iteration ', i, 'complete'
 
 if __name__ == '__main__':
     main()
