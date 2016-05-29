@@ -2,7 +2,7 @@ import numpy as np
 
 DX = 40
 DY = 40
-ITR = 100000
+ITR = 2000
 
 
 def read_data(filename):

@@ -3,13 +3,13 @@
 
 #define INFILE "pre.txt"
 #define OUTFILE "post.csv"
-#define ARRAY_SIZE 1000
+#define ARRAY_SIZE 376
 
 void iterate(double data[][ARRAY_SIZE], int nx, int ny, int dx, int dy)
 {
-    for (int i = 0; i < nx; ++i)
+    for (int j = 0; j < ny; ++j)
     {
-        for (int j = 0; j < ny; ++j)
+        for (int i = 0; i < nx; ++i)
         {
             if (i % (dx + 1) == 0 && j % (dy + 1) == 0)
                 continue;
