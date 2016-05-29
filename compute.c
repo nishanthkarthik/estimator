@@ -7,33 +7,38 @@
 
 void iterate(double data[][ARRAY_SIZE], int nx, int ny, int dx, int dy)
 {
+    //increment diffs
+    ++dx;
+    ++dy;
+
     //bulk
     for (int i = 1; i < nx - 1; ++i)
     {
         for (int j = 1; j < ny - 1; ++j)
         {
-            if (!(i % (dx + 1)) && !(j % (dy + 1)))
-                continue;
-            data[i][j] = (data[i - 1][j] + data[i + 1][j] + data[i][j - 1] + data[i][j + 1]) / 4;
+            if ((i % dx) || (j % dy))
+                data[i][j] = (data[i - 1][j] + data[i + 1][j] + data[i][j - 1] + data[i][j + 1]) * 0.25;
         }
     }
-    
+
     // j = 0,ny-1 and iterate i
     for (int i = 1; i < nx - 1; ++i)
     {
-        if (!i % (dx + 1))
-            continue;
-        data[i][0] = (data[i - 1][0] + data[i + 1][0] + data[i][1]) / 3;
-        data[i][ny - 1] = (data[i - 1][ny - 1] + data[i + 1][ny - 1] + data[i][ny - 2]) / 3;
+        if (i % dx)
+        {
+            data[i][0] = (data[i - 1][0] + data[i + 1][0] + data[i][1]) / 3.0;
+            data[i][ny - 1] = (data[i - 1][ny - 1] + data[i + 1][ny - 1] + data[i][ny - 2]) / 3.0;
+        }
     }
 
     // i = 0,nx-1 and iterate j
     for (int j = 1; j < ny - 1; ++j)
     {
-        if (!j % (dy + 1))
-            continue;
-        data[0][j] = (data[0][j - 1] + data[0][j + 1] + data[1][j]) / 3;
-        data[nx - 1][j] = (data[nx - 1][j - 1] + data[nx - 1][j + 1] + data[nx - 2][j]) / 3;
+        if (j % dy)
+        {
+            data[0][j] = (data[0][j - 1] + data[0][j + 1] + data[1][j]) / 3.0;
+            data[nx - 1][j] = (data[nx - 1][j - 1] + data[nx - 1][j + 1] + data[nx - 2][j]) / 3.0;
+        }
     }
 
 }
