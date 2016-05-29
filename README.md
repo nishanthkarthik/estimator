@@ -6,7 +6,7 @@
 
 - 370x370 grid
 - 300 iterations
-- 1m25.584s for python interpreter
+- *1m 25.584s* for python interpreter
 
 # `baremetal.sh`
 
@@ -14,4 +14,6 @@
 
 - 370x370 grid
 - 100,000 iterations
-- 1m32.249s for python + gcc + C
+- *1m 32.249s* for python + gcc + C
+- *1m 0.165s* after tuning `C` code, thanks to http://stackoverflow.com/a/37506654/3951920
+
