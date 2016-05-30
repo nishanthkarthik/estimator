@@ -15,7 +15,7 @@ def get_2dr(data):
     y = data[:, 1]
     z = np.array(data[:, 2])
     lx = np.array(list(set(x)))
-    ly = np.array(list(set(x)))
+    ly = np.array(list(set(y)))
     shape = (lx.size, ly.size)
     arr = z.reshape(shape)
     return arr
