@@ -52,7 +52,7 @@ int main()
         exit(-1);
     }
     char dgt[50];
-    double arr[ARRAY_SIZE][ARRAY_SIZE];
+    static double arr[ARRAY_SIZE][ARRAY_SIZE];
 
     fgets(dgt, 50, in);
     int nx = atoi(dgt);
